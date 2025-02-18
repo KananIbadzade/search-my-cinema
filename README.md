@@ -5,25 +5,25 @@ A **React-based movie search application** that allows users to **browse popular
 ---
 
 ## 🚀 Features
-- 🔍 **Search for Movies** – Find movies by title using an external API.
-- 🎥 **Browse Popular Movies** – Discover trending and upcoming movies.
-- ⭐ **Add to Favorites** – Save your favorite movies to a separate list.
-- 🎨 **Responsive UI** – Optimized for all screen sizes.
-- ⚡ **Fast Performance** – Built with **Vite** for rapid development.
+-  **Search for Movies** – Find movies by title using an external API.
+-  **Browse Popular Movies** – Discover trending and upcoming movies.
+-  **Add to Favorites** – Save your favorite movies to a separate list.
+-  **Responsive UI** – Optimized for all screen sizes.
+-  **Fast Performance** – Built with **Vite** for rapid development.
 
 ---
 
 ## 🛠️ Technologies Used
-- ⚛ **React.js** – JavaScript library for UI development.
-- ⚡ **Vite** – Fast frontend tooling for React.
-- 🎬 **TMDB API** – Fetch movie data dynamically.
-- 💅 **CSS** – Styled components for UI design.
-- 🔥 **Context API** – Global state management for favorites.
+-  **React.js** – JavaScript library for UI development.
+-  **Vite** – Fast frontend tooling for React.
+-  **TMDB API** – Fetch movie data dynamically.
+-  **CSS** – Styled components for UI design.
+-  **Context API** – Global state management for favorites.
 
 ---
 
 ## ⚙️ Installation & Setup
-### 1️⃣ Clone the Repository
+### Clone the Repository
 ```bash
 git clone https://github.com/KananIbadzade/search-my-cinema.git
 cd search-my-cinema
