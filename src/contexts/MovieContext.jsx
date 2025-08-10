@@ -51,30 +51,33 @@ export const MovieProvider = ({children, user}) => {
 
     const addToFavorites = useCallback(async (movie) => {
         if (!user) throw new Error('AUTH_REQUIRED');
-        setFavoritesError(null);
-        setFavorites(prev => {
-            if (prev.some(m => m.id === movie.id)) return prev;
-            if (prev.length >= FAVORITES_LIMIT) {
-                console.warn('Favorites limit reached');
-                return prev;
-            }
-            const sanitized = {
-                id: movie.id,
-                title: movie.title,
-                poster_path: movie.poster_path,
-                release_date: movie.release_date
-            };
-            const next = [...prev, sanitized];
-            persistFavorites(next).catch(err => {
-                console.error('Persist add failed', err);
-                setFavoritesError('Failed to save favorite (Firestore). Check console & Firestore rules.');
-                // For debugging keep the item instead of rollback:
-                // setFavorites(p => p.filter(m => m.id !== sanitized.id));
-                alert('Failed to save favorite. Check Firestore rules / network.');
-            });
-            return next;
+
+        // Frontend hard cap
+        if (favorites.length >= FAVORITES_LIMIT) {
+            alert("You can only have up to 100 favorites.");
+            return;
+        }
+
+        // Prevent duplicates
+        if (favorites.some(m => m.id === movie.id)) return;
+
+        const sanitized = {
+            id: movie.id,
+            title: movie.title,
+            poster_path: movie.poster_path,
+            release_date: movie.release_date
+        };
+
+        const next = [...favorites, sanitized];
+        setFavorites(next);
+        persistFavorites(next).catch(err => {
+            console.error('Persist add failed', err);
+            setFavoritesError('Failed to save favorite (Firestore). Check console & Firestore rules.');
+            // For debugging keep the item instead of rollback:
+            // setFavorites(p => p.filter(m => m.id !== sanitized.id));
+            alert('Failed to save favorite. Check Firestore rules / network.');
         });
-    }, [user, persistFavorites]);
+    }, [user, favorites, persistFavorites]);
 
     const removeFromFavorites = useCallback(async (movieId) => {
         if (!user) throw new Error('AUTH_REQUIRED');
