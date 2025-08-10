@@ -28,19 +28,16 @@ function Home() {
 
     const handleSearch = async (e) => {
         e.preventDefault();
-        if(!searchQuery.trim()) return
-        if(loading) return
-
-        setLoading(true)
+        if (!searchQuery.trim() || loading) return;
+        setLoading(true);
         try {
-            const searchResults = await searchMovies(searchQuery)
-            setMovies(searchResults)
-            setError(null)
-        } catch(err) {
-            console.log(err)
-            setError("Failed to search movies...")
-        } finally { 
-            setLoading(false)
+            const searchResults = await searchMovies(searchQuery);
+            setMovies(searchResults);
+            setError(null);
+        } catch (err) {
+            setError("Failed to search movies...");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -50,11 +47,11 @@ function Home() {
             <input 
             type="text" 
             placeholder="Search for movies..." 
-            className="search_input"
+            className="search-input"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button type="submit" className="search_button">Search</button>
+            <button type="submit" className="search-button">Search</button>
         </form>
 
         {error && <div className="error-message">{error}</div>}
